@@ -23,12 +23,11 @@ function makeBoard() {
   //set all indexes as equal to 0(maybe these end up strings)
 
   for (let i = 0; i < HEIGHT; i++) {
-    let tempRow = [];
+    let row = [];
     for (let j = 0; j < WIDTH; j++) {
-      tempRow.push(null);
+      row.push(null);
     }
-    board.push(tempRow);
-    tempRow = [];
+    board.push(row);
   }
   console.log(board);
 }
@@ -37,7 +36,7 @@ function makeBoard() {
 
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
-    const htmlBoard = document.querySelector("#board");
+  const htmlBoard = document.querySelector("#board");
 
   // TODO: Creating HTML top row container
   const top = document.createElement("tr");
@@ -58,9 +57,15 @@ function makeHtmlBoard() {
   // uses HEIGHT to create table rows
   // uses WIDTH to create table cells for each row
   for (let y = 0; y < HEIGHT; y++) {
+    const row = document.createElement("tr");
+
     // TODO: Create a table row element and assign to a "row" variable
 
     for (let x = 0; x < WIDTH; x++) {
+      const cell = document.createElement("td");
+      cell.setAttribute("id", `c-${y}-${x}`);
+      row.appendChild(cell);
+
       // TODO: Create a table cell element and assign to a "cell" variable
 
       // TODO: add an id, c-y-x, to the above table cell element
@@ -69,6 +74,7 @@ function makeHtmlBoard() {
       // TODO: append the table cell to the table row
 
     }
+    htmlBoard.append(row);
     // TODO: append the row to the html board
 
   }
