@@ -21,20 +21,31 @@ function makeBoard() {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
   //make 6 arrays with 7 indexes each
   //set all indexes as equal to 0(maybe these end up strings)
+
+  for (let i = 0; i < HEIGHT; i++) {
+    let tempRow = [];
+    for (let j = 0; j < WIDTH; j++) {
+      tempRow.push(null);
+    }
+    board.push(tempRow);
+    tempRow = [];
+  }
+  console.log(board);
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
+    const htmlBoard = document.querySelector("#board");
 
-  // TODO: add comment for this code
+  // TODO: Creating HTML top row container
   const top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   const cell = document.createElement("td");
   top.addEventListener("click", handleClick);
 
-  // TODO: add comment for this code
+  // TODO: Creating top row
   //each row created shares an x or y, and then in each row is the other variable.
   for (let x = 0; x < WIDTH; x++) {
     let headCell = document.createElement("td");
@@ -49,7 +60,7 @@ function makeHtmlBoard() {
   for (let y = 0; y < HEIGHT; y++) {
     // TODO: Create a table row element and assign to a "row" variable
 
-    for (var x = 0; x < WIDTH; x++) {
+    for (let x = 0; x < WIDTH; x++) {
       // TODO: Create a table cell element and assign to a "cell" variable
 
       // TODO: add an id, c-y-x, to the above table cell element
@@ -86,10 +97,10 @@ function endGame(msg) {
 
 function handleClick(evt) {
   // get x from ID of clicked cell
-  var x = +evt.target.id;
+  let x = +evt.target.id;
 
   // get next spot in column (if none, ignore click)
-  var y = findSpotForCol(x);
+  let y = findSpotForCol(x);
   if (y === null) {
     return;
   }
