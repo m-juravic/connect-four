@@ -10,7 +10,7 @@
 const WIDTH = 7;
 const HEIGHT = 6;
 
-let currPlayer = 1; // active player: 1 or 2
+let currPlayer = "red"; // active player: 1 or 2
 let board = []; // array of rows, each row is array of cells  (board[y][x])
 
 /** makeBoard: create in-JS board structure:
@@ -99,6 +99,7 @@ function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell'
   const token = document.createElement('div');
   token.classList.add('piece');
+  token.style.setProperty('background-color', `${currPlayer}`)
   const correctCell = document.getElementById(`c-${y}-${x}`);
   correctCell.appendChild(token);
 }
@@ -110,6 +111,7 @@ function placeInTable(y, x) {
 
 function endGame(msg) {
   // TODO: pop up alert message
+  alert(msg);
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -136,15 +138,16 @@ function handleClick(evt) {
 
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
-  if (board[0].every(!null)) {
-    endGame();
-  }
+  // if (board[0].every(!null)) {
+  //   endGame();
+  // }
 
   // switch players
   // TODO: switch currPlayer 1 <-> 2
 
-  currPlayer === 1 ? currPlayer = 2 : currPlayer = 1;
+  currPlayer === "red" ? currPlayer = "blue" : currPlayer = "red";
 
+  console.log(board);
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
@@ -157,9 +160,23 @@ function checkForWin() {
    * currPlayer
    */
   function _win(cells) {
-
+    let redCount = 0;
+    let blueCount = 0;
+    for (let i = 0; i < cells.length; i++) {
+      if (cells[i] === "red") {
+        redCount++
+      } else if (cells[i] === "blue") {
+        blueCount++
+      }
+      if (redCount === 4 || blueCount === 4) {
+        return true;
+      }
+      console.log(redCount);
+      console.log(blueCount);
+    }; return false;
     // TODO: Check four cells to see if they're all legal & all color of current
     // player
+
 
   }
 
@@ -173,10 +190,10 @@ function checkForWin() {
       // each should be an array of 4 cell coordinates:
       // [ [y, x], [y, x], [y, x], [y, x] ]
 
-      let horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
-      let vert = [[y + 1, x], [y + 2, x], [y + 3, x], [y + 4, x]];
-      let diagDL = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
-      let diagDR = [[y, x], [y - 1, x - 1], [y - 2, x - 2], [y - 3, x - 3]];
+      let horiz = [board[y, x], board[y, x + 1], board[y, x + 2], board[y, x + 3]];
+      let vert = [board[y + 1, x], board[y + 2, x], board[y + 3, x], board[y + 4, x]];
+      let diagDL = [board[y, x], board[y + 1, x + 1], board[y + 2, x + 2], board[y + 3, x + 3]];
+      let diagDR = [board[y, x], board[y - 1, x - 1], board[y - 2, x - 2], board[y - 3, x - 3]];
 
       // find winner (only checking each win-possibility as needed)
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
