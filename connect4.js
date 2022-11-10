@@ -160,20 +160,21 @@ function checkForWin() {
    * currPlayer
    */
   function _win(cells) {
-    let redCount = 0;
-    let blueCount = 0;
-    for (let i = 0; i < cells.length; i++) {
-      if (cells[i] === "red") {
-        redCount++
-      } else if (cells[i] === "blue") {
-        blueCount++
-      }
-      if (redCount === 4 || blueCount === 4) {
-        return true;
-      }
-      console.log(redCount);
-      console.log(blueCount);
-    }; return false;
+    //this doesn't work
+    // let redCount = 0;
+    // let blueCount = 0;
+    // for (let i = 0; i < cells.length; i++) {
+    //   if (cells[i] === "red") {
+    //     redCount++
+    //   } else if (cells[i] === "blue") {
+    //     blueCount++
+    //   }
+    //   if (redCount === 4 || blueCount === 4) {
+    //     return true;
+    //   }
+    //   console.log(redCount);
+    //   console.log(blueCount);
+    // }; return false;
     // TODO: Check four cells to see if they're all legal & all color of current
     // player
 
