@@ -90,7 +90,11 @@ function findSpotForCol(x) {
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
-  // TODO: make a div and insert into correct table cell
+  // TODO: make a div and insert into correct table cell'
+  const token = document.createElement('div');
+  token.setAttribute('class', 'piece');
+  const correctCell = document.getElementById(`c-${y}-${x}`);
+  correctCell.append(token);
 }
 
 /** endGame: announce game end */
@@ -125,6 +129,9 @@ function handleClick(evt) {
 
   // switch players
   // TODO: switch currPlayer 1 <-> 2
+
+  currPlayer === 1 ? currPlayer = 2 : currPlayer = 1;
+
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
